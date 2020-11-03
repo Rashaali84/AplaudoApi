@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1022
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AplaudoApi", "AplaudoApi\AplaudoApi.csproj", "{86E50194-D58A-437A-95A2-411FB37D5311}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AplaudoApi.Tests", "AplaudoApi.Tests\AplaudoApi.Tests.csproj", "{9E357F0D-9D0D-4A74-9411-3CC6C6EAF690}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86E50194-D58A-437A-95A2-411FB37D5311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E50194-D58A-437A-95A2-411FB37D5311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E50194-D58A-437A-95A2-411FB37D5311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E50194-D58A-437A-95A2-411FB37D5311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E357F0D-9D0D-4A74-9411-3CC6C6EAF690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E357F0D-9D0D-4A74-9411-3CC6C6EAF690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E357F0D-9D0D-4A74-9411-3CC6C6EAF690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E357F0D-9D0D-4A74-9411-3CC6C6EAF690}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78B9752E-8A00-47ED-8FE5-137A6AB2A1EF}
+	EndGlobalSection
+EndGlobal
