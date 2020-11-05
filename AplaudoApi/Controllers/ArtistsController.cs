@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
-using System.Web.Mvc;
 using AplaudoApi.Models;
 
 
@@ -17,22 +16,33 @@ namespace AplaudoApi.Controllers
         //DB First Approach using dara model
         private AplaudoDBEntities db = new AplaudoDBEntities();
         // GET api/Artists
-        
-        public IHttpActionResult Get()
-        {
-            var artists = db.Artists;
-            
-            return Json(artists.ToList<Artist>());
-         
-        }
 
+        public IHttpActionResult Get()
+
+        {
+            var query = from ar in db.Artists.ToList<Artist>()
+                        orderby ar.ArtistFirstName 
+                        select new Artist
+                        {
+                            ArtistFirstName = ar.ArtistFirstName,
+                            ArtistLastName = ar.ArtistLastName,
+                            ArtistNickName = ar.ArtistNickName,
+                            ArtistId = ar.ArtistId
+
+                        };
+            return Json(query);
+
+        }
         // GET api/Artists/5
         public IHttpActionResult Get(int id)
 
         {
             var selectedArtist = db.Artists.SingleOrDefault(a => a.ArtistId == id);
-            return Json(selectedArtist);
-
+            if (selectedArtist != null)
+                return Json(selectedArtist);
+            else
+                return NotFound();
+;
         }
 
         // POST api/Artists
@@ -54,7 +64,25 @@ namespace AplaudoApi.Controllers
 
             return Ok();
         }
-
+        [Route("api/artists/userlogin")]
+        [HttpPost]
+        public IHttpActionResult UserLogin([FromBody]Artist artistCred)
+        {
+            using (AplaudoDBEntities ctx = new AplaudoDBEntities())
+            {
+                //check the user exists
+                var selectedArtist = db.Artists.SingleOrDefault(a => a.EmailAddress.Trim() == artistCred.EmailAddress.Trim());
+                if (selectedArtist != null)
+                {
+                    if (selectedArtist.Password == artistCred.Password)
+                        return Ok();
+                    else
+                        return NotFound();
+                }
+                else
+                    return NotFound();
+            }
+        }
         // PUT api/Artists/5
         public IHttpActionResult Put([FromBody]Artist artistObject)
         {
@@ -78,9 +106,6 @@ namespace AplaudoApi.Controllers
             }
 
             return Ok();
-
-
-
         }
 
         // DELETE api/Artists/5

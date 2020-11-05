@@ -13,6 +13,12 @@ namespace AplaudoApi
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+            // school route
+            config.Routes.MapHttpRoute(
+                name: "Login",
+                routeTemplate: "api/artists/userlogin",
+                defaults: new { controller = "artists" }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
