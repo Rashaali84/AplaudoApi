@@ -14,13 +14,14 @@ namespace AplaudoApi.Controllers
     public class ArtistsController : ApiController
     {
         //here we are the entites directly from the ef this is not recommended we should use DTO viewmodels
+        //DB First Approach using dara model
         private AplaudoDBEntities db = new AplaudoDBEntities();
         // GET api/Artists
         
         public IHttpActionResult Get()
         {
             var artists = db.Artists;
-            //return  Ok<IEnumerable<Aritst>>(db.Aritsts.ToList<Aritst>());
+            
             return Json(artists.ToList<Artist>());
          
         }
@@ -41,7 +42,11 @@ namespace AplaudoApi.Controllers
             {
                 ctx.Artists.Add(new Artist()
                 {
-                    ArtistFirstName = artistObject.ArtistFirstName
+                    ArtistFirstName = artistObject.ArtistFirstName,
+                    ArtistLastName=artistObject.ArtistLastName,
+                    ArtistNickName=artistObject.ArtistNickName,
+                    EmailAddress=artistObject.EmailAddress,
+                    Password=artistObject.Password
                 });
 
                 ctx.SaveChanges();
@@ -51,14 +56,19 @@ namespace AplaudoApi.Controllers
         }
 
         // PUT api/Artists/5
-        public IHttpActionResult Put(int id, [FromBody]Artist artistObject)
+        public IHttpActionResult Put([FromBody]Artist artistObject)
         {
-            using (var ctx = new AplaudoDBEntities())
+            using (AplaudoDBEntities ctx = new AplaudoDBEntities())
             {
-                var selectedArtist = db.Artists.Where(a => a.ArtistId == artistObject.ArtistId).FirstOrDefault<Artist>();
+                var selectedArtist = ctx.Artists.Where(a => a.ArtistId == artistObject.ArtistId).FirstOrDefault<Artist>();
                 if (selectedArtist != null)
                 {
                     selectedArtist.ArtistFirstName = artistObject.ArtistFirstName;
+                    selectedArtist.ArtistLastName = artistObject.ArtistLastName;
+                    selectedArtist.ArtistNickName = artistObject.ArtistNickName;
+                    selectedArtist.EmailAddress = artistObject.EmailAddress;
+                    selectedArtist.Password = artistObject.Password;
+                   
                     ctx.SaveChanges();
                 }
                 else
@@ -85,6 +95,7 @@ namespace AplaudoApi.Controllers
             else
             {
                 db.Artists.Remove(selectedArtist);
+                db.SaveChanges();
                 return Ok();  // Returns an Ok NegotiatedContentResult
             }
             
