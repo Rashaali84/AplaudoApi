@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AplaudoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AplaudoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Artists">
           <Key>
             <PropertyRef Name="ArtistId" />
@@ -14,13 +14,13 @@
           <Property Name="ArtistLastName" Type="nvarchar" MaxLength="500" />
           <Property Name="ArtistNickName" Type="nvarchar" MaxLength="500" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="500" />
-          <Property Name="Password" Type="nvarchar" MaxLength="500" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="VCode" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="AplaudoDBModelStoreContainer">
           <EntitySet Name="Artists" EntityType="Self.Artists" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AplaudoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -33,7 +33,8 @@
           <Property Name="ArtistLastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ArtistNickName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="AplaudoDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Artists" EntityType="Self.Artist" />
@@ -47,6 +48,7 @@
           <EntitySetMapping Name="Artists">
             <EntityTypeMapping TypeName="AplaudoDBModel.Artist">
               <MappingFragment StoreEntitySet="Artists">
+                <ScalarProperty Name="VCode" ColumnName="VCode" />
                 <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
                 <ScalarProperty Name="ArtistFirstName" ColumnName="ArtistFirstName" />
                 <ScalarProperty Name="ArtistLastName" ColumnName="ArtistLastName" />

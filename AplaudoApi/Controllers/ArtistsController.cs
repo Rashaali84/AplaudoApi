@@ -48,36 +48,55 @@ namespace AplaudoApi.Controllers
         // POST api/Artists
         public IHttpActionResult Post([FromBody]Artist artistObject)
         {
-            using (var ctx = new AplaudoDBEntities())
+            //Check if the sent object has already a registered email address
+            var selectedArtist = db.Artists.SingleOrDefault(a => a.EmailAddress.Trim()== artistObject.EmailAddress.Trim());
+            if (selectedArtist != null)
+                return Content(HttpStatusCode.Found, "You have already created an account.");
+            else
             {
-                ctx.Artists.Add(new Artist()
+                // encode the password -- to be done
+                var keyNew = Helper.GeneratePassword(10);
+                var password = Helper.EncodePassword(artistObject.Password, keyNew);
+                artistObject.VCode = keyNew;
+                artistObject.Password = password;
+         
+                using (var ctx = new AplaudoDBEntities())
                 {
-                    ArtistFirstName = artistObject.ArtistFirstName,
-                    ArtistLastName=artistObject.ArtistLastName,
-                    ArtistNickName=artistObject.ArtistNickName,
-                    EmailAddress=artistObject.EmailAddress,
-                    Password=artistObject.Password
-                });
+                    ctx.Artists.Add(new Artist()
+                    {
+                        ArtistFirstName = artistObject.ArtistFirstName,
+                        ArtistLastName = artistObject.ArtistLastName,
+                        ArtistNickName = artistObject.ArtistNickName,
+                        EmailAddress = artistObject.EmailAddress,
+                        Password = artistObject.Password
+                    });
 
-                ctx.SaveChanges();
+                    ctx.SaveChanges();
+                }
+
+                return Content(HttpStatusCode.Created, "Your account is created successfully.");
             }
-
-            return Ok();
         }
         [Route("api/artists/userlogin")]
         [HttpPost]
         public IHttpActionResult UserLogin([FromBody]Artist artistCred)
         {
+           
+
             using (AplaudoDBEntities ctx = new AplaudoDBEntities())
             {
                 //check the user exists
                 var selectedArtist = db.Artists.SingleOrDefault(a => a.EmailAddress.Trim() == artistCred.EmailAddress.Trim());
                 if (selectedArtist != null)
                 {
-                    if (selectedArtist.Password == artistCred.Password)
+                    //Encode the artist password 
+                    var hashCode = selectedArtist.VCode;
+                    //Password Hasing Process Call Helper Class Method    
+                    var encodingPasswordString = Helper.EncodePassword(artistCred.Password, hashCode);
+                    if (selectedArtist.Password == encodingPasswordString)
                         return Ok();
                     else
-                        return NotFound();
+                        return Content(HttpStatusCode.BadRequest, "Wrong user credentials.");
                 }
                 else
                     return NotFound();
@@ -96,7 +115,6 @@ namespace AplaudoApi.Controllers
                     selectedArtist.ArtistNickName = artistObject.ArtistNickName;
                     selectedArtist.EmailAddress = artistObject.EmailAddress;
                     selectedArtist.Password = artistObject.Password;
-                   
                     ctx.SaveChanges();
                 }
                 else
@@ -125,5 +143,7 @@ namespace AplaudoApi.Controllers
             }
             
         }
+
+       
     }
 }

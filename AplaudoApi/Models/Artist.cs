@@ -20,5 +20,6 @@ namespace AplaudoApi.Models
         public string ArtistNickName { get; set; }
         public string EmailAddress { get; set; }
         public string Password { get; set; }
+        public string VCode { get; set; }
     }
 }

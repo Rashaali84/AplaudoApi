@@ -185,6 +185,7 @@
       <DependentUpon>AplaudoDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ArtistsViewModel.cs" />
+    <Compile Include="Models\Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
