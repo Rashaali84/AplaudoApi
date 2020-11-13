@@ -45,13 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
@@ -161,31 +166,57 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
+    <Compile Include="Controllers\ConcertsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AplaudoDBModel.Context.cs">
+    <Compile Include="Models\AplaudoDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AplaudoDBModel.Context.tt</DependentUpon>
+      <DependentUpon>AplaudoDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AplaudoDBModel.cs">
+    <Compile Include="Models\AplaudoDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AplaudoDBModel.tt</DependentUpon>
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AplaudoDBModel.Designer.cs">
+    <Compile Include="Models\AplaudoDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AplaudoDBModel.edmx</DependentUpon>
+      <DependentUpon>AplaudoDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Artist.cs">
-      <DependentUpon>AplaudoDBModel.tt</DependentUpon>
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ArtistsViewModel.cs" />
+    <Compile Include="Models\ArtistType.cs">
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Concert.cs">
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConcertDTO.cs" />
+    <Compile Include="Models\Genere.cs">
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Helper.cs" />
+    <Compile Include="Models\MappingProfile.cs" />
+    <Compile Include="Models\Programma.cs">
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Style.cs">
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -218,22 +249,22 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\AplaudoDBModel.edmx">
+    <EntityDeploy Include="Models\AplaudoDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AplaudoDBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>AplaudoDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\AplaudoDBModel.Context.tt">
+    <Content Include="Models\AplaudoDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AplaudoDBModel.edmx</DependentUpon>
-      <LastGenOutput>AplaudoDBModel.Context.cs</LastGenOutput>
+      <DependentUpon>AplaudoDB.edmx</DependentUpon>
+      <LastGenOutput>AplaudoDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\AplaudoDBModel.edmx.diagram">
-      <DependentUpon>AplaudoDBModel.edmx</DependentUpon>
+    <Content Include="Models\AplaudoDB.edmx.diagram">
+      <DependentUpon>AplaudoDB.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\AplaudoDBModel.tt">
+    <Content Include="Models\AplaudoDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AplaudoDBModel.edmx</DependentUpon>
-      <LastGenOutput>AplaudoDBModel.cs</LastGenOutput>
+      <DependentUpon>AplaudoDB.edmx</DependentUpon>
+      <LastGenOutput>AplaudoDB.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\AplaudoApi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />

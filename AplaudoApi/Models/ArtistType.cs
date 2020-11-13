@@ -12,26 +12,18 @@ namespace AplaudoApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Artist
+    public partial class ArtistType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Artist()
+        public ArtistType()
         {
-            this.Concerts = new HashSet<Concert>();
+            this.Artists = new HashSet<Artist>();
         }
     
-        public long ArtistId { get; set; }
-        public string ArtistFirstName { get; set; }
-        public string ArtistLastName { get; set; }
-        public string ArtistNickName { get; set; }
-        public string EmailAddress { get; set; }
-        public string Password { get; set; }
-        public string VCode { get; set; }
-        public string PhotoLink { get; set; }
-        public Nullable<int> ArtistTypeId { get; set; }
+        public int ArtistTypeId { get; set; }
+        public string ArtistTypeName { get; set; }
     
-        public virtual ArtistType ArtistType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Concert> Concerts { get; set; }
+        public virtual ICollection<Artist> Artists { get; set; }
     }
 }

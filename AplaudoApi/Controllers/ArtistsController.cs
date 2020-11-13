@@ -68,6 +68,7 @@ namespace AplaudoApi.Controllers
                         ArtistLastName = artistObject.ArtistLastName,
                         ArtistNickName = artistObject.ArtistNickName,
                         EmailAddress = artistObject.EmailAddress,
+                        VCode = artistObject.VCode,
                         Password = artistObject.Password
                     });
 
@@ -81,8 +82,7 @@ namespace AplaudoApi.Controllers
         [HttpPost]
         public IHttpActionResult UserLogin([FromBody]Artist artistCred)
         {
-           
-
+          
             using (AplaudoDBEntities ctx = new AplaudoDBEntities())
             {
                 //check the user exists
@@ -91,7 +91,7 @@ namespace AplaudoApi.Controllers
                 {
                     //Encode the artist password 
                     var hashCode = selectedArtist.VCode;
-                    //Password Hasing Process Call Helper Class Method    
+                    //Password Hashing Process Call Helper Class Method    
                     var encodingPasswordString = Helper.EncodePassword(artistCred.Password, hashCode);
                     if (selectedArtist.Password == encodingPasswordString)
                         return Ok();
@@ -102,7 +102,31 @@ namespace AplaudoApi.Controllers
                     return NotFound();
             }
         }
-        // PUT api/Artists/5
+        [Route("api/artists/changepassword")]
+        [HttpPut]
+        public IHttpActionResult UserChangePassword([FromBody]Artist artistCred)
+        {
+            //get artist object from db
+            using (AplaudoDBEntities ctx = new AplaudoDBEntities())
+            {
+                //check the user exists
+                var selectedArtist = db.Artists.SingleOrDefault(a => a.EmailAddress.Trim() == artistCred.EmailAddress.Trim());
+                if (selectedArtist != null)
+                {
+                    // change old vcode and password to new ones
+                    var keyNew = Helper.GeneratePassword(10);
+                    var password = Helper.EncodePassword(artistCred.Password, keyNew);
+                    selectedArtist.VCode = keyNew;
+                    selectedArtist.Password = password;
+                    ctx.SaveChanges();
+
+                    return Content(HttpStatusCode.OK, "New password has been updated successfully.");
+                }
+                else
+                    return Content(HttpStatusCode.BadRequest, "Wrong user email address.");
+            }
+        }
+            // PUT api/Artists/5
         public IHttpActionResult Put([FromBody]Artist artistObject)
         {
             using (AplaudoDBEntities ctx = new AplaudoDBEntities())

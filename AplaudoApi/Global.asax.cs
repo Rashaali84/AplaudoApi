@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AplaudoApi.Models;
 
 namespace AplaudoApi
 {
@@ -18,6 +19,9 @@ namespace AplaudoApi
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //mapping configuration for the dto entities 
+            AutoMapper.Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
         }
     }
 }
