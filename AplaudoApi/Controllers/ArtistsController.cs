@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
 using AplaudoApi.Models;
-
+using AplaudoApi.Dto;
 
 namespace AplaudoApi.Controllers
 {
@@ -22,7 +22,7 @@ namespace AplaudoApi.Controllers
         {
             var query = from ar in db.Artists.ToList<Artist>()
                         orderby ar.ArtistFirstName 
-                        select new Artist
+                        select new ArtistDto
                         {
                             ArtistFirstName = ar.ArtistFirstName,
                             ArtistLastName = ar.ArtistLastName,

@@ -9,7 +9,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using AplaudoApi.Models;
-
+using AplaudoApi;
+using AplaudoApi.Dto;
+using AutoMapper;
 namespace AplaudoApi.Controllers
 {
     public class ConcertsController : ApiController
@@ -32,6 +34,7 @@ namespace AplaudoApi.Controllers
                                        ConcertLink=concertObj.ConcertLink,
                                        ConcertId = concertObj.ConcertId
                                    };
+                
                 return Json(filteredConcertList);
             }
             catch (Exception ex)
@@ -64,16 +67,42 @@ namespace AplaudoApi.Controllers
             }
         }
         // GET: api/Concerts/5
-        [ResponseType(typeof(Concert))]
+        [ResponseType(typeof(ConcertDto))]
         public IHttpActionResult GetConcert(long id)
         {
-            Concert concert = db.Concerts.Find(id);
-            if (concert == null)
+            try
             {
-                return NotFound();
-            }
 
-            return Ok(concert);
+                Concert concert = db.Concerts.Find(id);
+                if (concert == null)
+                {
+                    return NotFound();
+                }
+                ConcertDto concertOut = Mapper.Map<Concert, ConcertDto>(concert);
+                concertOut.Style = db.Styles.Find(concert.StyleId).StyleName;
+                concertOut.Genere = db.Generes.Find(concert.GenereId).GenreName;
+                concertOut.ArtistEmails = (from ar in db.Artists
+                                           where ar.Concerts.Any(c => c.ConcertId == concertOut.ConcertId)
+                                           select new ArtistDto
+                                           {
+                                               EmailAddress = ar.EmailAddress
+                                           }).ToList<ArtistDto>();
+                                          ;
+                concertOut.ProgrammaLinks = (from pro in db.Programmas
+                                                  where pro.Concerts.Any(c => c.ConcertId == concertOut.ConcertId)
+                                             select new ProgrammaDto
+                                             {
+                                                 ProgrammaLink = pro.ProgrammaLink
+                                             }).ToList<ProgrammaDto>();
+
+
+                return Content(HttpStatusCode.OK, concertOut);
+            }
+            catch(Exception ex)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+               
         }
 
         // PUT: api/Concerts/5
@@ -113,7 +142,7 @@ namespace AplaudoApi.Controllers
 
         // POST: api/Concerts
         [ResponseType(typeof(Concert))]
-        public IHttpActionResult PostConcert(ConcertDTO concertJson)
+        public IHttpActionResult PostConcert(ConcertDto concertJson)
         {
             // get list of progamma and list of artists in the concert 
             try
@@ -153,7 +182,11 @@ namespace AplaudoApi.Controllers
                     (db.Concerts.FirstOrDefault(c => c.ConcertId == myNewConcert.ConcertId)).Programmas.Add(db.Programmas.SingleOrDefault(prog => prog.ProgrammaId == programmaInserted.ProgrammaId));
                 }
                 db.SaveChanges();
-                return Content(HttpStatusCode.Created, "Your concert is created successfully.");
+                //return Content(HttpStatusCode.Created, "Your concert is created successfully.");
+                return Created(new Uri(Request.RequestUri + "/" + myNewConcert.ConcertId), 
+                    new { About=myNewConcert.About,
+                          ConcertId=myNewConcert.ConcertId,
+                          ConcertLink=myNewConcert.ConcertLink});
             }
             catch(Exception ex)
             {

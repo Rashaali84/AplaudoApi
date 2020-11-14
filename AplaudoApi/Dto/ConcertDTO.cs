@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
-namespace AplaudoApi.Models
+using AplaudoApi.Models;
+namespace AplaudoApi.Dto
 {
-    public class ConcertDTO
+    public class ConcertDto
     {
 
         public long ConcertId { get; set; }
@@ -15,8 +15,8 @@ namespace AplaudoApi.Models
         public Nullable<System.DateTime> Date { get; set; }
         public string ConcertLink { get; set; }
         public string PictureLink { get; set; }
-        public IList<Programma> ProgrammaLinks { get; set; }
-        public IList<Artist> ArtistEmails { get; set; }
+        public IList<ProgrammaDto> ProgrammaLinks { get; set; }
+        public IList<ArtistDto> ArtistEmails { get; set; }
 
     }
 }

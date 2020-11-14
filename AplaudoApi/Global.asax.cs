@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AplaudoApi.Models;
-
+using AutoMapper;
 namespace AplaudoApi
 {
     public class WebApiApplication : System.Web.HttpApplication
@@ -21,7 +21,8 @@ namespace AplaudoApi
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //mapping configuration for the dto entities 
-            AutoMapper.Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
+            //whenever you see action use lamda expression
+            Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
         }
     }
 }
