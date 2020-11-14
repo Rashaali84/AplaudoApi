@@ -17,11 +17,52 @@ namespace AplaudoApi.Controllers
         private AplaudoDBEntities db = new AplaudoDBEntities();
 
         // GET: api/Concerts
-        public IQueryable<Concert> GetConcerts()
+        //search in about in concerts by about field 
+        public IHttpActionResult GetConcerts(string searchtext)
         {
-            return db.Concerts;
+            try
+            {
+                IList<Concert> listConcerts = db.Concerts.Where(c => c.About.Contains(searchtext)).ToList<Concert>();
+                var filteredConcertList = from concertObj in listConcerts
+                                   orderby concertObj.Date
+                                   select new Concert
+                                   {
+                                       About = concertObj.About,
+                                       Date = concertObj.Date ,
+                                       ConcertLink=concertObj.ConcertLink,
+                                       ConcertId = concertObj.ConcertId
+                                   };
+                return Json(filteredConcertList);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
         }
+        public IHttpActionResult GetConcertsByEmailAddress(string emailaddress)
+        {
+            try
+            {
+                var selectedArtist = db.Artists.SingleOrDefault(x => x.EmailAddress == emailaddress.Trim());
 
+                var concertsListByEmail = from c in db.Concerts
+                                where c.Artists.Any(o => o.ArtistId == selectedArtist.ArtistId)
+                                select new {
+                                    About = c.About,
+                                    ConcertLink=c.ConcertLink,
+                                    Style=db.Styles.FirstOrDefault(st=>st.StyleId == c.StyleId).StyleName,
+                                    EmailAddress=selectedArtist.EmailAddress
+                                };
+
+              
+                return Json(concertsListByEmail.ToList());
+            }
+
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
         // GET: api/Concerts/5
         [ResponseType(typeof(Concert))]
         public IHttpActionResult GetConcert(long id)
