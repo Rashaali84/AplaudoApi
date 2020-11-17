@@ -11,12 +11,15 @@ namespace AplaudoApi.Dto
         public long ConcertId { get; set; }
         public string About { get; set; }
         public string Style { get; set; }
-        public string Genere { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public string ConcertLink { get; set; }
         public string PictureLink { get; set; }
-        public IList<ProgrammaDto> ProgrammaLinks { get; set; }
+        public string ProgrammaLink { get; set; }
+        public string TeaserLink { get; set; }
+        public string CountryName { get; set; }
+        public string InstrumentationValue { get; set; }
         public IList<ArtistDto> ArtistEmails { get; set; }
+        public IList<InstrumentDto> InstrumentNames {get; set;}
 
-    }
+}
 }

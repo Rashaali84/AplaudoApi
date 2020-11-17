@@ -167,13 +167,21 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\ConcertsController.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstrumentationsController.cs" />
+    <Compile Include="Controllers\InstrumentsController.cs" />
+    <Compile Include="Controllers\StylesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Dto\ArtistDto.cs" />
-    <Compile Include="Dto\ProgrammaDto.cs" />
+    <Compile Include="Dto\CountryDto.cs" />
+    <Compile Include="Dto\InstrumentationDto.cs" />
+    <Compile Include="Dto\InstrumentDto.cs" />
+    <Compile Include="Dto\StyleDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Dto\ConcertDto.cs" />
     <Compile Include="Models\AplaudoDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -198,15 +206,21 @@
     <Compile Include="Models\Concert.cs">
       <DependentUpon>AplaudoDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Dto\ConcertDto.cs" />
-    <Compile Include="Models\Genere.cs">
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Creation.cs">
       <DependentUpon>AplaudoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Helper.cs" />
     <Compile Include="App_Start\MappingProfile.cs" />
-    <Compile Include="Models\Programma.cs">
+    <Compile Include="Models\Instrument.cs">
       <DependentUpon>AplaudoDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Instrumentation.cs">
+      <DependentUpon>AplaudoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MinAge18.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>AplaudoDB.tt</DependentUpon>
     </Compile>

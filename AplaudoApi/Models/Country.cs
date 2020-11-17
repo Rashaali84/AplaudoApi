@@ -12,32 +12,21 @@ namespace AplaudoApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Concert
+    public partial class Country
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Concert()
+        public Country()
         {
             this.Artists = new HashSet<Artist>();
-            this.Instruments = new HashSet<Instrument>();
+            this.Concerts = new HashSet<Concert>();
         }
     
-        public long ConcertId { get; set; }
-        public string About { get; set; }
-        public Nullable<int> StyleId { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public string ConcertLink { get; set; }
-        public string PictureLink { get; set; }
-        public string ProgrammaLink { get; set; }
-        public Nullable<long> InstrumentationId { get; set; }
-        public Nullable<long> CountryId { get; set; }
-        public string TeaserLink { get; set; }
+        public long CountryId { get; set; }
+        public string CountryName { get; set; }
     
-        public virtual Country Country { get; set; }
-        public virtual Instrumentation Instrumentation { get; set; }
-        public virtual Style Style { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Artist> Artists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Instrument> Instruments { get; set; }
+        public virtual ICollection<Concert> Concerts { get; set; }
     }
 }

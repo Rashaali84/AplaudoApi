@@ -5,8 +5,9 @@ using System.Web;
 
 namespace AplaudoApi.Dto
 {
-    public class ProgrammaDto
+    public class StyleDto
     {
-        public string ProgrammaLink { get; set; }
+        public int StyleId { get; set; }
+        public string StyleName { get; set; }
     }
 }

@@ -29,8 +29,17 @@ namespace AplaudoApi.Models
         public string VCode { get; set; }
         public string PhotoLink { get; set; }
         public Nullable<int> ArtistTypeId { get; set; }
+        public string Spotify { get; set; }
+        public string YouTube { get; set; }
+        public string iTunes { get; set; }
+        public string SoundCloud { get; set; }
+        public string LinkedIn { get; set; }
+        public string Website { get; set; }
+        public string Bio { get; set; }
+        public Nullable<long> CountryId { get; set; }
     
         public virtual ArtistType ArtistType { get; set; }
+        public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Concert> Concerts { get; set; }
     }

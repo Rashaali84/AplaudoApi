@@ -80,7 +80,7 @@ namespace AplaudoApi.Controllers
                 }
                 ConcertDto concertOut = Mapper.Map<Concert, ConcertDto>(concert);
                 concertOut.Style = db.Styles.Find(concert.StyleId).StyleName;
-                concertOut.Genere = db.Generes.Find(concert.GenereId).GenreName;
+                
                 concertOut.ArtistEmails = (from ar in db.Artists
                                            where ar.Concerts.Any(c => c.ConcertId == concertOut.ConcertId)
                                            select new ArtistDto
@@ -88,12 +88,7 @@ namespace AplaudoApi.Controllers
                                                EmailAddress = ar.EmailAddress
                                            }).ToList<ArtistDto>();
                                           ;
-                concertOut.ProgrammaLinks = (from pro in db.Programmas
-                                                  where pro.Concerts.Any(c => c.ConcertId == concertOut.ConcertId)
-                                             select new ProgrammaDto
-                                             {
-                                                 ProgrammaLink = pro.ProgrammaLink
-                                             }).ToList<ProgrammaDto>();
+                
 
 
                 return Content(HttpStatusCode.OK, concertOut);
@@ -154,11 +149,15 @@ namespace AplaudoApi.Controllers
                 var myNewConcert = new Concert()
                 {
                     About = concertJson.About,
-                    StyleId = (db.Styles.FirstOrDefault(s => s.StyleName == concertJson.Style)).StyleId,
-                    GenereId = (db.Generes.FirstOrDefault(s => s.GenreName == concertJson.Genere)).GenreId,
+                    StyleId = (db.Styles.FirstOrDefault(s => s.StyleName.Trim().ToLower() == concertJson.Style.Trim().ToLower())).StyleId,
+
                     Date = concertJson.Date,
                     ConcertLink = concertJson.ConcertLink,
-                    PictureLink = concertJson.PictureLink
+                    PictureLink = concertJson.PictureLink,
+                    ProgrammaLink = concertJson.ProgrammaLink,
+                    TeaserLink = concertJson.TeaserLink,
+                    CountryId = (db.Countries.FirstOrDefault(c => c.CountryName.ToLower().Trim() == concertJson.CountryName.Trim().ToLower()).CountryId),
+                    InstrumentationId=(db.Instrumentations.FirstOrDefault(intsr => intsr.InstrumentationValue.Trim().ToLower() == concertJson.InstrumentationValue.Trim().ToLower()).InstrumentationId)
                 };
 
                 db.Concerts.Add(myNewConcert);
@@ -169,19 +168,17 @@ namespace AplaudoApi.Controllers
                     (db.Concerts.FirstOrDefault(c => c.ConcertId == myNewConcert.ConcertId)).Artists.Add(db.Artists.SingleOrDefault(ar => ar.EmailAddress == artistEmails.EmailAddress.Trim()));
                 db.SaveChanges();
 
-                //save programma 
-                foreach (var programmaValue in concertJson.ProgrammaLinks)
+                //Save instruments
+                foreach (var instrumentNameValue in concertJson.InstrumentNames)
                 {
-                    var programmaInserted = new Programma()
-                    {
-                        ProgrammaLink = programmaValue.ProgrammaLink.Trim()
-                    };
-                    db.Programmas.Add(programmaInserted);
-                    db.SaveChanges();
-                    //add programma to the concerts
-                    (db.Concerts.FirstOrDefault(c => c.ConcertId == myNewConcert.ConcertId)).Programmas.Add(db.Programmas.SingleOrDefault(prog => prog.ProgrammaId == programmaInserted.ProgrammaId));
+                    //get the  instrument Id one by one
+                    int instrumentIdDB = (db.Instruments.FirstOrDefault(inst => inst.InstrumentName.Trim().ToLower() == instrumentNameValue.InstrumentName.Trim().ToLower())).InstrumentId;
+                    
+                    //add each instrument to this particular concert
+                    (db.Concerts.FirstOrDefault(c => c.ConcertId == myNewConcert.ConcertId)).Instruments.Add(db.Instruments.SingleOrDefault(inst => inst.InstrumentId == instrumentIdDB));
                 }
                 db.SaveChanges();
+
                 //return Content(HttpStatusCode.Created, "Your concert is created successfully.");
                 return Created(new Uri(Request.RequestUri + "/" + myNewConcert.ConcertId), 
                     new { About=myNewConcert.About,

@@ -30,8 +30,10 @@ namespace AplaudoApi.Models
         public virtual DbSet<Artist> Artists { get; set; }
         public virtual DbSet<ArtistType> ArtistTypes { get; set; }
         public virtual DbSet<Concert> Concerts { get; set; }
-        public virtual DbSet<Genere> Generes { get; set; }
-        public virtual DbSet<Programma> Programmas { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Creation> Creations { get; set; }
+        public virtual DbSet<Instrumentation> Instrumentations { get; set; }
+        public virtual DbSet<Instrument> Instruments { get; set; }
         public virtual DbSet<Style> Styles { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     

@@ -12,16 +12,16 @@ namespace AplaudoApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Genere
+    public partial class Instrumentation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Genere()
+        public Instrumentation()
         {
             this.Concerts = new HashSet<Concert>();
         }
     
-        public int GenreId { get; set; }
-        public string GenreName { get; set; }
+        public long InstrumentationId { get; set; }
+        public string InstrumentationValue { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Concert> Concerts { get; set; }
