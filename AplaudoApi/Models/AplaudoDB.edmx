@@ -27,6 +27,22 @@
           <Property Name="Bio" Type="nvarchar(max)" />
           <Property Name="CountryId" Type="bigint" />
         </EntityType>
+        <EntityType Name="ArtistsInstruments">
+          <Key>
+            <PropertyRef Name="ArtistId" />
+            <PropertyRef Name="InstrumentId" />
+          </Key>
+          <Property Name="ArtistId" Type="bigint" Nullable="false" />
+          <Property Name="InstrumentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArtistsStyles">
+          <Key>
+            <PropertyRef Name="ArtistId" />
+            <PropertyRef Name="StyleId" />
+          </Key>
+          <Property Name="ArtistId" Type="bigint" Nullable="false" />
+          <Property Name="StyleId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ArtistTypes">
           <Key>
             <PropertyRef Name="ArtistTypeId" />
@@ -39,6 +55,7 @@
             <PropertyRef Name="ConcertId" />
           </Key>
           <Property Name="ConcertId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConcertTitle" Type="nvarchar(max)" />
           <Property Name="About" Type="nvarchar" MaxLength="500" />
           <Property Name="StyleId" Type="int" />
           <Property Name="Date" Type="datetime" />
@@ -110,6 +127,14 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'AplaudoDB.dbo.tbl_Countries' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tbl_Countries">
+          <Property Name="CountryID" Type="int" />
+          <Property Name="CountryName" Type="varchar" MaxLength="50" />
+          <Property Name="TwoCharCountryCode" Type="char" MaxLength="2" />
+          <Property Name="ThreeCharCountryCode" Type="char" MaxLength="3" />
+        </EntityType>-->
         <Association Name="FK_Artists_ArtistTypes">
           <End Role="ArtistTypes" Type="Self.ArtistTypes" Multiplicity="0..1" />
           <End Role="Artists" Type="Self.Artists" Multiplicity="*" />
@@ -155,6 +180,54 @@
             </Principal>
             <Dependent Role="ConcertsArtists">
               <PropertyRef Name="ConcertId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArtistsInstruments_Artists">
+          <End Role="Artists" Type="Self.Artists" Multiplicity="1" />
+          <End Role="ArtistsInstruments" Type="Self.ArtistsInstruments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="ArtistId" />
+            </Principal>
+            <Dependent Role="ArtistsInstruments">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArtistsInstruments_Instruments">
+          <End Role="Instruments" Type="Self.Instruments" Multiplicity="1" />
+          <End Role="ArtistsInstruments" Type="Self.ArtistsInstruments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instruments">
+              <PropertyRef Name="InstrumentId" />
+            </Principal>
+            <Dependent Role="ArtistsInstruments">
+              <PropertyRef Name="InstrumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArtistsStyles_Artists">
+          <End Role="Artists" Type="Self.Artists" Multiplicity="1" />
+          <End Role="ArtistsStyles" Type="Self.ArtistsStyles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="ArtistId" />
+            </Principal>
+            <Dependent Role="ArtistsStyles">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArtistsStyles_Styles">
+          <End Role="Styles" Type="Self.Styles" Multiplicity="1" />
+          <End Role="ArtistsStyles" Type="Self.ArtistsStyles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Styles">
+              <PropertyRef Name="StyleId" />
+            </Principal>
+            <Dependent Role="ArtistsStyles">
+              <PropertyRef Name="StyleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -251,6 +324,8 @@
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="AplaudoDBModelStoreContainer">
           <EntitySet Name="Artists" EntityType="Self.Artists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArtistsInstruments" EntityType="Self.ArtistsInstruments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArtistsStyles" EntityType="Self.ArtistsStyles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArtistTypes" EntityType="Self.ArtistTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Concerts" EntityType="Self.Concerts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConcertsArtists" EntityType="Self.ConcertsArtists" Schema="dbo" store:Type="Tables" />
@@ -276,6 +351,22 @@
           <AssociationSet Name="FK_ArtistsConcerts_Concerts" Association="Self.FK_ArtistsConcerts_Concerts">
             <End Role="Concerts" EntitySet="Concerts" />
             <End Role="ConcertsArtists" EntitySet="ConcertsArtists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArtistsInstruments_Artists" Association="Self.FK_ArtistsInstruments_Artists">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="ArtistsInstruments" EntitySet="ArtistsInstruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArtistsInstruments_Instruments" Association="Self.FK_ArtistsInstruments_Instruments">
+            <End Role="Instruments" EntitySet="Instruments" />
+            <End Role="ArtistsInstruments" EntitySet="ArtistsInstruments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArtistsStyles_Artists" Association="Self.FK_ArtistsStyles_Artists">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="ArtistsStyles" EntitySet="ArtistsStyles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArtistsStyles_Styles" Association="Self.FK_ArtistsStyles_Styles">
+            <End Role="Styles" EntitySet="Styles" />
+            <End Role="ArtistsStyles" EntitySet="ArtistsStyles" />
           </AssociationSet>
           <AssociationSet Name="FK_Concerts_Countries" Association="Self.FK_Concerts_Countries">
             <End Role="Countries" EntitySet="Countries" />
@@ -326,6 +417,8 @@
           <Property Name="CountryId" Type="Int64" />
           <NavigationProperty Name="ArtistType" Relationship="Self.FK_Artists_ArtistTypes" FromRole="Artists" ToRole="ArtistTypes" />
           <NavigationProperty Name="Country" Relationship="Self.FK_Artists_Countries" FromRole="Artists" ToRole="Countries" />
+          <NavigationProperty Name="Instruments" Relationship="Self.ArtistsInstruments" FromRole="Artists" ToRole="Instruments" />
+          <NavigationProperty Name="Styles" Relationship="Self.ArtistsStyles" FromRole="Artists" ToRole="Styles" />
           <NavigationProperty Name="Concerts" Relationship="Self.ConcertsArtists" FromRole="Artists" ToRole="Concerts" />
         </EntityType>
         <EntityType Name="ArtistType">
@@ -341,6 +434,7 @@
             <PropertyRef Name="ConcertId" />
           </Key>
           <Property Name="ConcertId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConcertTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="About" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="StyleId" Type="Int32" />
           <Property Name="Date" Type="DateTime" Precision="3" />
@@ -386,6 +480,7 @@
           </Key>
           <Property Name="InstrumentId" Type="Int32" Nullable="false" />
           <Property Name="InstrumentName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Artists" Relationship="Self.ArtistsInstruments" FromRole="Instruments" ToRole="Artists" />
           <NavigationProperty Name="Concerts" Relationship="Self.ConcertsInstruments" FromRole="Instruments" ToRole="Concerts" />
         </EntityType>
         <EntityType Name="Style">
@@ -395,6 +490,7 @@
           <Property Name="StyleId" Type="Int32" Nullable="false" />
           <Property Name="StyleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Concerts" Relationship="Self.FK_Concerts_Styles" FromRole="Styles" ToRole="Concerts" />
+          <NavigationProperty Name="Artists" Relationship="Self.ArtistsStyles" FromRole="Styles" ToRole="Artists" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -466,6 +562,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ArtistsInstruments">
+          <End Role="Artists" Type="Self.Artist" Multiplicity="*" />
+          <End Role="Instruments" Type="Self.Instrument" Multiplicity="*" />
+        </Association>
+        <Association Name="ArtistsStyles">
+          <End Role="Artists" Type="Self.Artist" Multiplicity="*" />
+          <End Role="Styles" Type="Self.Style" Multiplicity="*" />
+        </Association>
         <Association Name="ConcertsArtists">
           <End Role="Artists" Type="Self.Artist" Multiplicity="*" />
           <End Role="Concerts" Type="Self.Concert" Multiplicity="*" />
@@ -503,6 +607,14 @@
           <AssociationSet Name="FK_Concerts_Styles" Association="Self.FK_Concerts_Styles">
             <End Role="Styles" EntitySet="Styles" />
             <End Role="Concerts" EntitySet="Concerts" />
+          </AssociationSet>
+          <AssociationSet Name="ArtistsInstruments" Association="Self.ArtistsInstruments">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Instruments" EntitySet="Instruments" />
+          </AssociationSet>
+          <AssociationSet Name="ArtistsStyles" Association="Self.ArtistsStyles">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Styles" EntitySet="Styles" />
           </AssociationSet>
           <AssociationSet Name="ConcertsArtists" Association="Self.ConcertsArtists">
             <End Role="Artists" EntitySet="Artists" />
@@ -595,6 +707,7 @@
             <EntityTypeMapping TypeName="AplaudoDBModel.Concert">
               <MappingFragment StoreEntitySet="Concerts">
                 <ScalarProperty Name="ConcertId" ColumnName="ConcertId" />
+                <ScalarProperty Name="ConcertTitle" ColumnName="ConcertTitle" />
                 <ScalarProperty Name="About" ColumnName="About" />
                 <ScalarProperty Name="StyleId" ColumnName="StyleId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -658,6 +771,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="ArtistsInstruments" TypeName="AplaudoDBModel.ArtistsInstruments" StoreEntitySet="ArtistsInstruments">
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+            </EndProperty>
+            <EndProperty Name="Instruments">
+              <ScalarProperty Name="InstrumentId" ColumnName="InstrumentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ArtistsStyles" TypeName="AplaudoDBModel.ArtistsStyles" StoreEntitySet="ArtistsStyles">
+            <EndProperty Name="Artists">
+              <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+            </EndProperty>
+            <EndProperty Name="Styles">
+              <ScalarProperty Name="StyleId" ColumnName="StyleId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="ConcertsArtists" TypeName="AplaudoDBModel.ConcertsArtists" StoreEntitySet="ConcertsArtists">
             <EndProperty Name="Artists">
               <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />

@@ -17,6 +17,8 @@ namespace AplaudoApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Artist()
         {
+            this.Instruments = new HashSet<Instrument>();
+            this.Styles = new HashSet<Style>();
             this.Concerts = new HashSet<Concert>();
         }
     
@@ -40,6 +42,10 @@ namespace AplaudoApi.Models
     
         public virtual ArtistType ArtistType { get; set; }
         public virtual Country Country { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Instrument> Instruments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Style> Styles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Concert> Concerts { get; set; }
     }

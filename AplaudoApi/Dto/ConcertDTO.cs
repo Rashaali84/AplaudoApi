@@ -9,6 +9,7 @@ namespace AplaudoApi.Dto
     {
 
         public long ConcertId { get; set; }
+        public string ConcertTitle { get; set; }
         public string About { get; set; }
         public string Style { get; set; }
         public Nullable<System.DateTime> Date { get; set; }

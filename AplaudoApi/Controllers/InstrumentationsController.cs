@@ -19,7 +19,7 @@ namespace AplaudoApi.Controllers
         // GET: api/Instrumentations
         public IHttpActionResult GetInstrumentations()
         {
-            var targetList = db.Instrumentations.Select(x => new InstrumentationDto() { InstrumentationId = x.InstrumentationId, InstrumentationValue = x.InstrumentationValue })
+            var targetList = db.Instrumentations.Select(x => new InstrumentationDto() { InstrumentationId = x.InstrumentationId, InstrumentationValue = x.InstrumentationValue.Trim() })
                  .ToList();
             return Json(targetList);
         }

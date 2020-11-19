@@ -22,6 +22,7 @@ namespace AplaudoApi.Models
         }
     
         public long ConcertId { get; set; }
+        public string ConcertTitle { get; set; }
         public string About { get; set; }
         public Nullable<int> StyleId { get; set; }
         public Nullable<System.DateTime> Date { get; set; }

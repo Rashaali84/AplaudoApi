@@ -18,6 +18,7 @@ namespace AplaudoApi.Models
         public Style()
         {
             this.Concerts = new HashSet<Concert>();
+            this.Artists = new HashSet<Artist>();
         }
     
         public int StyleId { get; set; }
@@ -25,5 +26,7 @@ namespace AplaudoApi.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Concert> Concerts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Artist> Artists { get; set; }
     }
 }
