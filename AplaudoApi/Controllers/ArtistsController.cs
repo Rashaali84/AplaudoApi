@@ -106,65 +106,80 @@ namespace AplaudoApi.Controllers
         // POST api/Artists
         public IHttpActionResult Post([FromBody]ArtistDto artistObject)
         {
-            //Check if the sent object has already a registered email address
-            var selectedArtist = db.Artists.SingleOrDefault(a => a.EmailAddress.Trim()== artistObject.EmailAddress.Trim());
-            if (selectedArtist != null)
-                return Content(HttpStatusCode.Found, "You have already created an account.");
-            else
+            try
             {
-                // encode the password -- to be done
-                var keyNew = Helper.GeneratePassword(10);
-                var password = Helper.EncodePassword(artistObject.Password, keyNew);
-                artistObject.VCode = keyNew;
-                artistObject.Password = password;
-                using (TransactionScope scope = new TransactionScope())
+                //Check if the sent object has already a registered email address
+                var selectedArtist = db.Artists.SingleOrDefault(a => a.EmailAddress.Trim() == artistObject.EmailAddress.Trim());
+                if (selectedArtist != null)
+                    return Content(HttpStatusCode.Found, "You have already created an account.");
+                else
                 {
-                    using (var ctx = new AplaudoDBEntities())
+                    // encode the password -- to be done
+                    var keyNew = Helper.GeneratePassword(10);
+                    var password = Helper.EncodePassword(artistObject.Password, keyNew);
+                    artistObject.VCode = keyNew;
+                    artistObject.Password = password;
+                    using (TransactionScope scope = new TransactionScope())
                     {
-                        var myNewArtist = new Artist()
+                        using (var ctx = new AplaudoDBEntities())
                         {
-                            ArtistFirstName = artistObject.ArtistFirstName,
-                            ArtistLastName = artistObject.ArtistLastName,
-                            ArtistNickName = artistObject.ArtistNickName,
-                            EmailAddress = artistObject.EmailAddress,
-                            Bio = artistObject.Bio,
-                            PhotoLink = artistObject.PhotoLink,
-                            Spotify=artistObject.Spotify,
-                            YouTube=artistObject.YouTube,
-                            LinkedIn=artistObject.LinkedIn,
-                            iTunes=artistObject.iTunes,
-                            SoundCloud=artistObject.SoundCloud,
-                            Website=artistObject.WebSite,
-                            CountryId=ctx.Countries.FirstOrDefault(c => c.CountryName == artistObject.CountryName).CountryId,
-                            VCode = artistObject.VCode,
-                            Password = artistObject.Password
-                        };
-                        ctx.Artists.Add(myNewArtist);
-                        ctx.SaveChanges();
-                        //Now add instruments and styles 
-                        foreach (var instrumentNameValue in artistObject.InstrumentNames)
-                        {
-                            //get the  instrument Id one by one
-                            int instrumentIdDB = (db.Instruments.FirstOrDefault(inst => inst.InstrumentName.Trim().ToLower() == instrumentNameValue.InstrumentName.Trim().ToLower())).InstrumentId;
+                            var myNewArtist = new Artist()
+                            {
+                                ArtistFirstName = artistObject.ArtistFirstName,
+                                ArtistLastName = artistObject.ArtistLastName,
+                                ArtistNickName = artistObject.ArtistNickName,
+                                EmailAddress = artistObject.EmailAddress.Trim(),
+                                Bio = artistObject.Bio,
+                                PhotoLink = artistObject.PhotoLink,
+                                Spotify = artistObject.Spotify,
+                                YouTube = artistObject.YouTube,
+                                LinkedIn = artistObject.LinkedIn,
+                                iTunes = artistObject.iTunes,
+                                SoundCloud = artistObject.SoundCloud,
+                                Website = artistObject.WebSite,
+                                CountryId = ctx.Countries.FirstOrDefault(c => c.CountryName == artistObject.CountryName).CountryId,
+                                VCode = artistObject.VCode,
+                                Password = artistObject.Password
+                            };
+                            ctx.Artists.Add(myNewArtist);
+                            ctx.SaveChanges();
+                            //Now add instruments and styles 
+                            if (artistObject != null && artistObject.InstrumentNames != null)
+                            {
+                                foreach (var instrumentNameValue in artistObject.InstrumentNames)
+                                {
+                                    //get the  instrument Id one by one
+                                    int instrumentIdDB = (db.Instruments.FirstOrDefault(inst => inst.InstrumentName.Trim().ToLower() == instrumentNameValue.InstrumentName.Trim().ToLower())).InstrumentId;
 
-                            //add each instrument to this particular concert
-                            (db.Artists.FirstOrDefault(c => c.ArtistId == myNewArtist.ArtistId)).Instruments.Add(db.Instruments.SingleOrDefault(inst => inst.InstrumentId == instrumentIdDB));
-                        }
-                        db.SaveChanges();
-                        foreach (var styleValue in artistObject.StyleNames)
-                        {
-                            //get the  instrument Id one by one
-                            int styleIDDB = (db.Styles.FirstOrDefault(st => st.StyleName.Trim().ToLower() == styleValue.StyleName.Trim().ToLower())).StyleId;
+                                    //add each instrument to this particular concert
+                                    (db.Artists.FirstOrDefault(c => c.ArtistId == myNewArtist.ArtistId)).Instruments.Add(db.Instruments.SingleOrDefault(inst => inst.InstrumentId == instrumentIdDB));
+                                }
 
-                            //add each instrument to this particular concert
-                            (db.Artists.FirstOrDefault(c => c.ArtistId == myNewArtist.ArtistId)).Styles.Add(db.Styles.SingleOrDefault(st => st.StyleId == styleIDDB));
+                                db.SaveChanges();
+                            }
+                            //Insert styles names per user
+                            if (artistObject != null && artistObject.StyleNames != null)
+                            {
+                                foreach (var styleValue in artistObject.StyleNames)
+                                {
+                                    //get the  instrument Id one by one
+                                    int styleIDDB = (db.Styles.FirstOrDefault(st => st.StyleName.Trim().ToLower() == styleValue.StyleName.Trim().ToLower())).StyleId;
+
+                                    //add each instrument to this particular concert
+                                    (db.Artists.FirstOrDefault(c => c.ArtistId == myNewArtist.ArtistId)).Styles.Add(db.Styles.SingleOrDefault(st => st.StyleId == styleIDDB));
+                                }
+                                db.SaveChanges();
+                            }
                         }
-                        db.SaveChanges();
+                        scope.Complete();
                     }
-                    scope.Complete();
-                }
 
-                return Content(HttpStatusCode.Created, "Your account is created successfully.");
+                    return Content(HttpStatusCode.Created, "Your account is created successfully.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
         [Route("api/artists/userlogin")]
