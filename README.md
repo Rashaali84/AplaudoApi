@@ -38,41 +38,7 @@
              - https://aplaudoapi.azurewebsites.net/api/artists/   POST
              
                ```ruby
-               {
-       
-        "ArtistFirstName": "Rasha",
-        "ArtistLastName": "Ali",
-        "ArtistNickName": "Rasha",
-        "EmailAddress":  "Rashaali@gmail.com",
-        "Password": "123456",
-        "Bio":"Here is my Bio",
-        "PhotoLink":"http://wwww.google.com/2",
-        "Spotify":"sot",
-        "YouTube":"http://wwww.google.com/2",
-        "iTunes":"tunes",
-        "SoundCloud":"sound",
-        "WebSite":"http://wwww.google.com/2",
-        "LinkedIn":"http://wwww.google.com/linkedin",
-        "CountryName":"Belgium",
-        "StyleNames":
-             [
-                        { "StyleName":"Asian"},
-                {"StyleName": "African"}
-             ],
-        "InstrumentNames": [
-        {
-            "InstrumentName": "accordion"
-        },
-        {
-            "InstrumentName": "bass"
-        },
-        {
-            "InstrumentName": "Piano"
-        }
-           ]
- 
- }    
-```
+               {"ArtistFirstName": "Rasha","ArtistLastName": "Ali",  "ArtistNickName": "Rasha", "EmailAddress":  "Rashaali@gmail.com", "Password": "123456", "Bio":"Here is my Bio","PhotoLink":"http://wwww.google.com/2","Spotify":"sot",  "YouTube":"http://wwww.google.com/2","iTunes":"tunes","SoundCloud":"sound", "WebSite":"http://wwww.google.com/2", "LinkedIn":"http://wwww.google.com/linkedin","CountryName":"Belgium","StyleNames": [ { "StyleName":"Asian"}, {"StyleName": "African"} ], "InstrumentNames": [ { "InstrumentName":"accordion"},{ "InstrumentName": "bass"},{ "InstrumentName": "Piano"}] }     ```
               - 
          Concerts 
          Styles
