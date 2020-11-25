@@ -60,10 +60,13 @@
              
              
     - Styles
+           - https://aplaudoapi.azurewebsites.net/api/styles GET
     - Instruments
+           - https://aplaudoapi.azurewebsites.net/api/instruments  GET
     - Instrumentaions
+           - https://aplaudoapi.azurewebsites.net/api/instrumentations  GET
     - Countries 
-         
+           - https://aplaudoapi.azurewebsites.net/api/Countries GET
    
 ## Setup
 
