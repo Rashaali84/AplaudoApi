@@ -7,7 +7,7 @@
 - [Use Case Diagram](#usecase)
 - [Architect Design Diagram](#architect)
 - [Setup](#setup)
-- [Databases Scripts - MSSQL]
+- [Databases Scripts - MSSQL](##Databases Scripts - MSSQL)
 - [Demo of Project](#demo)
 - [Screen Capture of Project](#screen-capture-of-project)
 - [Project Status](#project-status)
@@ -76,6 +76,11 @@ Download the db scripts and run it over a MSSQLSERVER editor with db name Aplaud
 ## Use Case Diagram
 
  Here you are the use case of the project for the two releases v1, V2 .
+ 
+## Databases Scripts - MSSQL
+
+ ![ER](https://github.com/Rashaali84/AplaudoApi/blob/master/db%20ER.png)
+
 
 ![usecase](https://github.com/Rashaali84/AplaudoApi/blob/master/aplaudi%20api%20use%20case.png)
 
