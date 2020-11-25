@@ -55,8 +55,7 @@
   - Concerts 
             - https://aplaudoapi.azurewebsites.net/api/concerts  POST 
              
-             ```ruby
-             {  "ConcertId":14,  "About":"This concert is really fun and different let' stry to update ", "ConcertTitle":"Title is really what matters ","Style":"African","Date":"12/01/2010","ConcertLink":"http://wwww.google.com/44", "PictureLink":"http://wwww.google.com/442", "ProgrammaLink":"http://wwww.google.com/44", "TeaserLink":"http://wwww.google.com/44", "CountryName":"Belgium","InstrumentationValue":"Solo","ArtistEmails": [{"EmailAddress": "par@gmail.com"}, {"EmailAddress": "rasaa@gmail.com"}, {"EmailAddress": "Ralyy.MM@gmail.com"}], "InstrumentNames":[{"InstrumentName":"accordion"},{"InstrumentName":"bass"},{"InstrumentName":"Piano"}]}Response:{ "About": "Concert about acting in the heart of brussels in the heart of Europe in chrismas an all over the world last check final","ConcertId": 16, "ConcertLink": "http://wwww.google.com/1"}201 Created http status code  ```
+               ```ruby {  "ConcertId":14,  "About":"This concert is really fun and different let' stry to update ", "ConcertTitle":"Title is really what matters ","Style":"African","Date":"12/01/2010","ConcertLink":"http://wwww.google.com/44", "PictureLink":"http://wwww.google.com/442", "ProgrammaLink":"http://wwww.google.com/44", "TeaserLink":"http://wwww.google.com/44", "CountryName":"Belgium","InstrumentationValue":"Solo","ArtistEmails": [{"EmailAddress": "par@gmail.com"}, {"EmailAddress": "rasaa@gmail.com"}, {"EmailAddress": "Ralyy.MM@gmail.com"}], "InstrumentNames":[{"InstrumentName":"accordion"},{"InstrumentName":"bass"},{"InstrumentName":"Piano"}]}Response:{ "About": "Concert about acting in the heart of brussels in the heart of Europe in chrismas an all over the world last check final","ConcertId": 16, "ConcertLink": "http://wwww.google.com/1"}201 Created http status code  ```
              
              
     - Styles
@@ -94,8 +93,8 @@ This is the sql scripts for the db
 ![Architect-Design](https://github.com/Rashaali84/AplaudoApi/blob/master/arc.png)
 
 ## Demo of Project
-A quick video for the whole website
-![Video-Demo](https://aplaudo.herokuapp.com/signin)
+
+the front-end website https://aplaudo.herokuapp.com/app.html.
 
 ## Project Status
 
