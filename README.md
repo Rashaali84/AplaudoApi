@@ -1,4 +1,4 @@
-# EYE-See-You
+# Aplaudo - API 
 
 ## Table of contents
 
@@ -84,15 +84,15 @@ Download the db scripts and run it over a MSSQLSERVER editor with db name Aplaud
 ![Screenshot](https://github.com/Rashaali84/AplaudoApi/blob/master/proj.png)
 
 ## Architect Design Diagram
-![Architect-Design](https://github.com/Rashaali84/Eye-See-You/blob/master/Architect%20Design.png)
+![Architect-Design](https://github.com/Rashaali84/AplaudoApi/blob/master/arc.png)
 
 ## Demo of Project
 A quick video for the whole website
-![Video-Demo](https://github.com/Rashaali84/Eye-See-You/blob/master/WebSite%20Demo.mp4)
+![Video-Demo](https://aplaudo.herokuapp.com/signin)
 
 ## Project Status
 
-Project is finished .
+Project is finished the must have use cases  .
 
 ## Contact
 Contact reposiroty contributors for more details.
