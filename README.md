@@ -81,7 +81,7 @@ Download the db scripts and run it over a MSSQLSERVER editor with db name Aplaud
 
 ## Screen Capture of Project
 
-![Screenshot](https://github.com/Rashaali84/Eye-See-You/blob/master/eye%20see%20you.png)
+![Screenshot](https://github.com/Rashaali84/AplaudoApi/blob/master/proj.png)
 
 ## Architect Design Diagram
 ![Architect-Design](https://github.com/Rashaali84/Eye-See-You/blob/master/Architect%20Design.png)
