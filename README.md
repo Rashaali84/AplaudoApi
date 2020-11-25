@@ -77,7 +77,7 @@ Download the db scripts and run it over a MSSQLSERVER editor with db name Aplaud
 
  Here you are the use case of the project for the two releases v1, V2 .
 
-![usecase](https://github.com/Rashaali84/Eye-See-You/blob/master/Use-Case%20EYESEEYOU.jpg)
+![usecase](https://github.com/Rashaali84/AplaudoApi/blob/master/aplaudi%20api%20use%20case.png)
 
 ## Screen Capture of Project
 
