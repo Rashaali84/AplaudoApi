@@ -46,19 +46,15 @@
               {  "EmailAddress":  "Dam_h@gmail.com", "Password":"gbvfgt5#hhd"} *"Failed :  404 not found "Wrong user credentials."Success : 200 ok"* ```
             - https://aplaudoapi.azurewebsites.net/api/artists/changepassword PUT
             
-             ```ruby 
-              {  "EmailAddress":  "Dam_h@gmail.com", "Password":"gbvfgt5#hhd"} *"Failed :  404 not found "Wrong user credentials."Success : 200 ok"* ```
+             ```ruby  {  "EmailAddress":  "Dam_h@gmail.com", "Password":"gbvfgt5#hhd"} *"Failed :  404 not found "Wrong user credentials."Success : 200 ok"* ```
             - https://aplaudoapi.azurewebsites.net/api/concerts?emailaddress=par@gmail.com GET
             
             
-         - Concerts 
-             - https://aplaudoapi.azurewebsites.net/api/concerts  POST
-             
-               ```ruby
+    - Concerts 
+             - https://aplaudoapi.azurewebsites.net/api/concerts  POST  ```ruby
 {  "ConcertId":14,  "About":"This concert is really fun and different let' stry to update ", "ConcertTitle":"Title is really what matters ","Style":"African","Date":"12/01/2010","ConcertLink":"http://wwww.google.com/44", "PictureLink":"http://wwww.google.com/442", "ProgrammaLink":"http://wwww.google.com/44", "TeaserLink":"http://wwww.google.com/44", "CountryName":"Belgium","InstrumentationValue":"Solo",
 "ArtistEmails": [{"EmailAddress": "par@gmail.com"}, {"EmailAddress": "rasaa@gmail.com"}, {"EmailAddress": "Ralyy.MM@gmail.com"}], "InstrumentNames":[{"InstrumentName":"accordion"},{"InstrumentName":"bass"},{"InstrumentName":"Piano"}]}
-Response:{ "About": "Concert about acting in the heart of brussels in the heart of Europe in chrismas an all over the world last check final","ConcertId": 16, "ConcertLink": "http://wwww.google.com/1"}201 Created http status code 
- ```
+Response:{ "About": "Concert about acting in the heart of brussels in the heart of Europe in chrismas an all over the world last check final","ConcertId": 16, "ConcertLink": "http://wwww.google.com/1"}201 Created http status code ```
              
          - Styles
          - Instruments
