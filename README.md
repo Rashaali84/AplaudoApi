@@ -37,7 +37,8 @@
            - https://aplaudoapi.azurewebsites.net/api/artists/    GET
              - https://aplaudoapi.azurewebsites.net/api/artists/   POST
              
-                 ``` {
+               ```ruby
+               {
        
         "ArtistFirstName": "Rasha",
         "ArtistLastName": "Ali",
