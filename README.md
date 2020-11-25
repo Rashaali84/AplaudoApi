@@ -31,12 +31,12 @@
    
    - MVC ( Models - Views - Controllers) have been used as a model for this project.
    - Data Modeling using database first approach entity framework .
-   -Controllers are as follows 
-         Artists
-           Api calls for artist ->
+   - Controllers are as follows 
+         - Artists
+            - Api calls for artist ->
               - https://aplaudoapi.azurewebsites.net/api/artists/    GET
               - https://aplaudoapi.azurewebsites.net/api/artists/   POST
-                 '{
+                 ``` {
        
         "ArtistFirstName": "Rasha",
         "ArtistLastName": "Ali",
@@ -69,7 +69,8 @@
         }
            ]
  
- }    '
+ }    
+```
               - 
          Concerts 
          Styles
