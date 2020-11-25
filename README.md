@@ -76,11 +76,11 @@ Download the db scripts and run it over a MSSQLSERVER editor with db name Aplaud
 ## Use Case Diagram
 
  Here you are the use case of the project for the two releases v1, V2 .
-  ![ER](https://github.com/Rashaali84/AplaudoApi/blob/master/db%20ER.png)
+  ![usecase](https://github.com/Rashaali84/AplaudoApi/blob/master/aplaudi%20api%20use%20case.png)
  
 ## Databases Scripts - MSSQL
 
-![usecase](https://github.com/Rashaali84/AplaudoApi/blob/master/aplaudi%20api%20use%20case.png)
+![ER](https://github.com/Rashaali84/AplaudoApi/blob/master/db%20ER.png)
 
 ## Screen Capture of Project
 
