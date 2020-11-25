@@ -42,15 +42,13 @@
              
             - https://aplaudoapi.azurewebsites.net/api/artists/userlogin   POST
              
-               ```ruby  {  "EmailAddress":  "Dam_h@gmail.com", "Password":"gbvfgt5#hhd"} *Failed :  404 not found "Wrong user credentials."Success : 200 ok*```
+```ruby  {  "EmailAddress":  "Dam_h@gmail.com", "Password":"gbvfgt5#hhd"} *Failed :  404 not found "Wrong user credentials."Success : 200 ok* ```
 
-
-              - 
-         Concerts 
-         Styles
-         Instruments
-         Instrumentaions
-         Countries 
+         - Concerts 
+         - Styles
+         - Instruments
+         - Instrumentaions
+         - Countries 
          
    
 ## Setup
