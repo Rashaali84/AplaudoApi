@@ -82,6 +82,10 @@ Download the db scripts and run it over a MSSQLSERVER editor with db name Aplaud
 
 ![ER](https://github.com/Rashaali84/AplaudoApi/blob/master/db%20ER.png)
 
+This is the sql scripts for the db 
+![DB Scripts SQL](https://github.com/Rashaali84/AplaudoApi/blob/master/scripts.sql)
+
+
 ## Screen Capture of Project
 
 ![Screenshot](https://github.com/Rashaali84/AplaudoApi/blob/master/proj.png)
