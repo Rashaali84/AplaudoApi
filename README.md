@@ -38,22 +38,12 @@
            - https://aplaudoapi.azurewebsites.net/api/artists/   POST
              
                ```ruby
-               {"ArtistFirstName": "Rasha","ArtistLastName": "Ali",  "ArtistNickName": "Rasha", "EmailAddress":  "Rashaali@gmail.com", "Password": "123456", "Bio":"Here is my Bio","PhotoLink":"http://wwww.google.com/2","Spotify":"sot",  "YouTube":"http://wwww.google.com/2","iTunes":"tunes","SoundCloud":"sound", "WebSite":"http://wwww.google.com/2", "LinkedIn":"http://wwww.google.com/linkedin","CountryName":"Belgium","StyleNames": [ { "StyleName":"Asian"}, {"StyleName": "African"} ], "InstrumentNames": [ { "InstrumentName":"accordion"},{ "InstrumentName": "bass"},{ "InstrumentName": "Piano"}] }     ```
-               
-                  *Success : Response http status code : 201 created -- Response body :  "Your account is created successfully."
-Already registered : Response http status code : 302 Found-- ""You have already created an account." *
-
+               {"ArtistFirstName": "Rasha","ArtistLastName": "Ali",  "ArtistNickName": "Rasha", "EmailAddress":  "Rashaali@gmail.com", "Password": "123456", "Bio":"Here is my Bio","PhotoLink":"http://wwww.google.com/2","Spotify":"sot",  "YouTube":"http://wwww.google.com/2","iTunes":"tunes","SoundCloud":"sound", "WebSite":"http://wwww.google.com/2", "LinkedIn":"http://wwww.google.com/linkedin","CountryName":"Belgium","StyleNames": [ { "StyleName":"Asian"}, {"StyleName": "African"} ], "InstrumentNames": [ { "InstrumentName":"accordion"},{ "InstrumentName": "bass"},{ "InstrumentName": "Piano"}] }    *Success : Response http status code : 201 created -- Response body :  "Your account is created successfully."Already registered Response http status code : 302 Found-- ""You have already created an account."*  ```
+             
             - https://aplaudoapi.azurewebsites.net/api/artists/userlogin   POST
              
-               ```ruby  {
+               ```ruby  {  "EmailAddress":  "Dam_h@gmail.com", "Password":"gbvfgt5#hhd"} *Failed :  404 not found "Wrong user credentials."Success : 200 ok*```
 
-        "EmailAddress":  "Dam_h@gmail.com",
-        "Password":"gbvfgt5#hhd"
- }
-```
-*  Failed :  404 not found
-"Wrong user credentials."
-Success : 200 ok *
 
               - 
          Concerts 
