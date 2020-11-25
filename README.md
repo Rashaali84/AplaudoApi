@@ -92,7 +92,7 @@ Download the db scripts and run it over a MSSQLSERVER editor with db name Aplaud
 ![ER](https://github.com/Rashaali84/AplaudoApi/blob/master/db%20ER.png)
 
 This is the sql scripts for the db 
-![DB Scripts SQL](https://github.com/Rashaali84/AplaudoApi/blob/master/scripts.sql)
+![Aplaudo DB Scripts SQL -- Download from here](https://github.com/Rashaali84/AplaudoApi/blob/master/scripts.sql)
 
 
 ## Screen Capture of Project
@@ -114,13 +114,17 @@ Project is finished the must have use cases  .
  - As an artist, I want to create my artist profile.
  - As an artist, I want to edit my artist profile.
  - As a spectator, I can search for artists and concerts
- Business Function done so far withing thr crud operation of Artis and concerts models 
+ 
+ *Business Function done so far withing thr crud operation of Artis and concerts models* 
+ 
  - Checking already registered emails 
  - Concerts collaborators must be system users and registered in the system .
  - Hashing passwords usin Hash and salt technique in .Net frameworl.
  - CORS Eenabling check .
- To be done ..
- - The rest of user stories in this file .
+ 
+ *To be done ..*
+ 
+ - The rest of user stories in this file .![Aplaudo User Stories](https://github.com/Rashaali84/AplaudoApi/blob/master/Aplaudo%20User%20Stories.Pdf)
  - JWT authentication.
 
 ## Contact
